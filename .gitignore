@@ -2,6 +2,8 @@ bin/
 include/
 lib/
 
+None/*.jpg
+
 ### OSX ###
 .DS_Store
 .AppleDouble
