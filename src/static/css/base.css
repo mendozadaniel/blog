@@ -1,5 +1,35 @@
-h1 {
-    color: #777777;
+@font-face {
+  font-family: 'Cardo-Bold';
+  src: url('../fonts/Cardo-Bold.ttf');
+  src: local('../fonts/Cardo-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Cardo-Regular';
+  src: url('../fonts/Cardo-Regular.ttf');
+  src: local('../fonts/Cardo-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'JosefinSans-Bold';
+  src: url('../fonts/JosefinSans-Bold.ttf');
+  src: local('../fonts/JosefinSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'JosefinSans-Regular';
+  src: url('../fonts/JosefinSans-Regular.ttf');
+  src: local('../fonts/JosefinSans-Regular.ttf');
+}
+
+
+
+h1, h2, h3, h4, h5 {
+    font-family: Cardo-Bold;
+}
+
+p {
+    font-family: JosefinSans-Bold;
 }
 
 .wmd-panel {
@@ -9,4 +39,61 @@ h1 {
 
 .comment-reply {
     display:none;
+}
+
+.thumbnail-post:hover {
+    cursor: pointer;
+}
+
+
+.search-icon {
+    background-color: #FFF;
+}
+
+.search-field input {
+    border-left-style: none;
+}
+
+.navbar-container {
+    background-color: white;
+}
+
+
+
+
+
+
+.invalid-credentials {
+    color: red;
+}
+
+
+
+
+.text-logo {
+    font-family: Cardo-Bold;
+}
+
+.navbar-right-items {
+    height: 50px;
+    padding: 15px 15px;
+    line-height: 20px;
+    font-size: 18px;
+    font-family: Cardo-Bold;
+}
+
+
+.post-list-item-p {
+    font-size: 16px;
+}
+
+
+.post-list-container {
+    background: transparent;
+}
+
+body {
+    background-image: url("../images/skulls.png");
+    //background-image: url("../images/sos.png");
+    //background-image: url("../images/straws_@2X.png");
 }

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import (
     authenticate,
     get_user_model,
@@ -9,25 +10,40 @@ from django.shortcuts import render, redirect
 
 from .forms import UserLoginForm, UserRegisterForm
 
-# Create your views here.
+User = get_user_model()
+
 def login_view(request):
     title = "Login"
+    login_page = True
     next_page = request.GET.get("next")
     form = UserLoginForm(request.POST or None)
+
     if form.is_valid():
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
+
         user = authenticate(username=username, password=password)
-        login(request, user)
-        if next_page:
-            return redirect(next_page)
-        return redirect("/")
-    return render(request, "form.html", {"form": form, "title": title})
+        if user:
+            login(request, user)
+            if next_page:
+                return redirect(next_page)
+            return redirect("/")
+        else:
+            messages.error(request, "Incorrect username and/or password.")
+
+    context = {
+        "title": title,
+        "form": form,
+        "login_page": login_page
+    }
+    return render(request, "form.html", context)
 
 def register_view(request):
     title = "Register"
+    login_page = False
     next_page = request.GET.get("next")
     form = UserRegisterForm(request.POST or None)
+
     if form.is_valid():
         user = form.save(commit=False)
         password = form.cleaned_data.get("password")
@@ -40,7 +56,8 @@ def register_view(request):
         return redirect("/")
     context = {
         "title": title,
-        "form": form
+        "form": form,
+        "login_page": login_page
     }
     return render(request, "form.html", context)
 

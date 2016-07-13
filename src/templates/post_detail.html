@@ -6,10 +6,6 @@
 
 {% block head_title %} {{ post.title }} | {{ block.super }}{% endblock %}
 
-{% block post_detail_link %}
-<li><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></li>
-{% endblock %}
-
 {% block content %}
 <div class='col-sm-8 col-sm-offset-2'>
   {% if post.image %}
@@ -35,13 +31,14 @@
       <div>
         <p class="lead">Comments</p>
         {% if request.user.is_authenticated %}
-        <form method="POST" action=".">
-          {% csrf_token %}
-          {{ comment_form|crispy }}
-          <input type="submit" value="Post comment" class="btn btn-default" />
-        </form>
+          <form method="POST" action=".">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <input type="submit" value="Post comment" class="btn btn-default" />
+          </form>
         {% else %}
-        <p>You must be logged in to comment.</p>
+          <p>You must <a href="{% url 'login' %}?next={{ post.get_absolute_url }}">log in</a> or
+            <a href="{% url 'register' %}?next={{ post.get_absolute_url }}">register</a> to comment.</p>
         {% endif %}
         {% for comment in comments %}
         <blockquote>
@@ -67,7 +64,8 @@
               <input type="submit" value="Reply" class="btn btn-default">
             </form>
             {% else %}
-            <p>You must be logged in to comment.</p>
+            <p>You must <a href="{% url 'login' %}?next={{ post.get_absolute_url }}">log in</a> or
+              <a href="{% url 'register' %}?next={{ post.get_absolute_url }}">register</a> to comment.</p>
             {% endif %}
           </div>
 

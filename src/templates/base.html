@@ -22,20 +22,42 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
-	{% include "messages_display.html" %}
-	<div class='container'>
-    <ol class="breadcrumb">
-      <li><a href='{% url 'posts:list' %}'>Home</a></li>
-      {% block post_detail_link %}
-      {% endblock %}
+	<div class='container post-list-container'>
 
-      {% if not request.user.is_authenticated %}
-        <li class="pull-right"><a href='{% url "register" %}'>Register</a></li>
-        <li class="pull-right"><a href='{% url "login" %}'>Login</a></li>
-      {% else %}
-        <li class="pull-right"><a href='{% url "logout" %}'>Logout</a></li>
-      {% endif %}
-    </ol>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid navbar-container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand text-logo" href="{% url 'posts:list' %}">A day in the life</a>
+
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        {% block search %}{% endblock %}
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_staff or request.user.is_superuser %}
+            <li><a class="navbar-right-items" href='{% url "posts:create" %}'>Create</a></li>
+            {% endif %}
+
+            {% if not request.user.is_authenticated %}
+              <li><a class="navbar-right-items" href='{% url "register" %}'>Register</a></li>
+              <li><a class="navbar-right-items" href='{% url "login" %}'>Login</a></li>
+            {% else %}
+              <!--<li role="separator" class="divider"></li>-->
+              <li><a class="navbar-right-items" href='{% url "logout" %}'>Logout</a></li>
+            {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+	  {% include "messages_display.html" %}
 		{% block content %}{% endblock %}
 	</div>
   <!-- Latest compiled and minified JavaScript -->
@@ -45,26 +67,27 @@
   <script type="text/javascript">
     $(document).ready(function(){
 
-
       $(".content-markdown").each(function(){
         var content = $(this).text();
         var markedContent = marked(content);
         $(this).html(markedContent);
-      })
+      });
 
       $(".post-detail-item img").each(function(){
-        $(this).addClass("img-responsive")
+        $(this).addClass("img-responsive");
       });
 
       var titleInput = $("#id_title");
       var contentInput = $("#id_content");
 
-      function setContent(value){
-        var markedContent = marked(value);
-        $("#preview-content").html(markedContent);
-        $("#preview-content img").each(function(){
-          $(this).addClass("img-responsive");
-        });
+      function setContent(value) {
+        if (value !== undefined) {
+          var markedContent = marked(value);
+          $("#preview-content").html(markedContent);
+          $("#preview-content img").each(function(){
+            $(this).addClass("img-responsive");
+          });
+        }
       }
 
       // initializes the content preview
@@ -91,7 +114,12 @@
         $(this).parent().next(".comment-reply").fadeToggle();
       });
 
-    })
+      $(".thumbnail-post").click(function(){
+        window.location=$(this).find("a").attr("href");
+        return false;
+      });
+
+    });
   </script>
 </body>
 </html>

@@ -96,7 +96,7 @@ def post_list(request):
             Q(user__first_name__icontains=query) |
             Q(user__last_name__icontains=query)
         ).distinct()  # removes duplicates
-    paginator = Paginator(queryset_list, 2)  # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 10)  # Show 25 contacts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:
@@ -127,8 +127,8 @@ def post_update(request, slug=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, "<a href='#'>Saved!</a>",
-                         extra_tags="html_safe")
+        # messages.success(request, "<a href='#'>Saved!</a>",
+        #                 extra_tags="html_safe")
         return HttpResponseRedirect(instance.get_absolute_url())
 
     context_data = {
