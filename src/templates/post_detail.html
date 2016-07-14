@@ -1,7 +1,7 @@
-
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 
+{% load crispy_forms_tags %}
+{% load static %}
 {% load urlify %}
 
 {% block head_title %} {{ post.title }} | {{ block.super }}{% endblock %}
@@ -78,4 +78,8 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/post-detail.js' %}"></script>
 {% endblock %}

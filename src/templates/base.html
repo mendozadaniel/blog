@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 
 <!-- DOCTYPE html -->
 <html>
@@ -64,62 +64,6 @@
   <script src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function(){
-
-      $(".content-markdown").each(function(){
-        var content = $(this).text();
-        var markedContent = marked(content);
-        $(this).html(markedContent);
-      });
-
-      $(".post-detail-item img").each(function(){
-        $(this).addClass("img-responsive");
-      });
-
-      var titleInput = $("#id_title");
-      var contentInput = $("#id_content");
-
-      function setContent(value) {
-        if (value !== undefined) {
-          var markedContent = marked(value);
-          $("#preview-content").html(markedContent);
-          $("#preview-content img").each(function(){
-            $(this).addClass("img-responsive");
-          });
-        }
-      }
-
-      // initializes the content preview
-      setContent(contentInput.val());
-
-      contentInput.keyup(function(){
-        var newContent = $(this).val();
-        setContent(newContent);
-      });
-
-      function setTitle(value){
-        $("#preview-title").text(value);
-      }
-
-      setTitle(titleInput.val());
-
-      titleInput.keyup(function(){
-        var newTitle = $(this).val();
-        setTitle(newTitle);
-      });
-
-      $(".comment-reply-btn").click(function(event){
-        event.preventDefault();
-        $(this).parent().next(".comment-reply").fadeToggle();
-      });
-
-      $(".thumbnail-post").click(function(){
-        window.location=$(this).find("a").attr("href");
-        return false;
-      });
-
-    });
-  </script>
+  {% block javascript %}{% endblock %}
 </body>
 </html>

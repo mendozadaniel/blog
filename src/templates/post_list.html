@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block search %}
 <form class="navbar-form navbar-left" method="GET" action="">
@@ -63,6 +64,8 @@
   </center>
 </div>
 
+{% endblock %}
 
-
+{% block javascript %}
+<script src="{% static 'js/post-list.js' %}"></script>
 {% endblock %}
