@@ -1,0 +1,15 @@
+
+
+.search-icon {
+    background-color: #FFF; /* light gray */
+}
+
+.search-field input {
+    border-left-style: none;
+}
+
+
+
+.thumbnail-post:hover {
+    cursor: pointer;
+}

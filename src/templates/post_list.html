@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/post-list.css' %}"/>
+{% endblock %}
+
 {% block search %}
 <form class="navbar-form navbar-left" method="GET" action="">
   {% csrf_token %}
@@ -30,7 +34,7 @@
             <small>{{ object.publish }}</small>
           </h3>
           {% if object.user.get_full_name %}
-          <p class="post-list-item-p">Author: {{ object.user.get_full_name }} </p>
+          <p class="post-author">Author: {{ object.user.get_full_name }} </p>
           {% endif %}
           {{ object.get_markdown|truncatechars_html:120  }}
           <a href="{{ object.get_absolute_url }}" role="button"></a>

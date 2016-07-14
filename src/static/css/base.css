@@ -22,8 +22,6 @@
   src: local('../fonts/JosefinSans-Regular.ttf');
 }
 
-
-
 h1, h2, h3, h4, h5 {
     font-family: Cardo-Bold;
 }
@@ -32,46 +30,14 @@ p {
     font-family: JosefinSans-Bold;
 }
 
-.wmd-panel {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-}
-
-.comment-reply {
-    display:none;
-}
-
-.thumbnail-post:hover {
-    cursor: pointer;
+body {
+    background-image: url("../images/skulls.png");
 }
 
 
-.search-icon {
-    background-color: #FFF;
-}
-
-.search-field input {
-    border-left-style: none;
-}
 
 .navbar-container {
     background-color: white;
-}
-
-
-
-
-
-
-.invalid-credentials {
-    color: red;
-}
-
-
-
-
-.text-logo {
-    font-family: Cardo-Bold;
 }
 
 .navbar-right-items {
@@ -83,17 +49,28 @@ p {
 }
 
 
-.post-list-item-p {
+
+.text-logo {
+    font-family: Cardo-Bold;
+}
+
+
+
+.post-author {
     font-size: 16px;
 }
 
-
-.post-list-container {
+.post-container {
     background: transparent;
 }
 
-body {
-    background-image: url("../images/skulls.png");
-    //background-image: url("../images/sos.png");
-    //background-image: url("../images/straws_@2X.png");
+
+
+/*
+
+.wmd-panel {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }
+
+*/
