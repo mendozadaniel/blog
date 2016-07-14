@@ -31,7 +31,8 @@ p {
 }
 
 body {
-    background-image: url("../images/skulls.png");
+    //background-image: url("../images/skulls.png");
+    background-image: url("../images/random_grey_variations.png");
 }
 
 
@@ -63,14 +64,3 @@ body {
 .post-container {
     background: transparent;
 }
-
-
-
-/*
-
-.wmd-panel {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-}
-
-*/
