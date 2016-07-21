@@ -31,11 +31,14 @@ p {
 }
 
 body {
-    //background-image: url("../images/skulls.png");
     background-image: url("../images/random_grey_variations.png");
 }
 
 
+
+.navbar {
+    border: None;
+}
 
 .navbar-container {
     background-color: white;
