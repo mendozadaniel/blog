@@ -106,9 +106,8 @@ class UserLoginSerializer(ModelSerializer):
             Q(username=username)
         ).distinct()
 
-        # change this, user cna type the wrong username but correct email and correct password and it works,
+        # change this, user can type the wrong username but correct email and correct password and it works,
         # and also vice versa
-        # this doesn't make sense to do, revisit
         user_qs = user_qs.exclude(email__isnull=True).exclude(email__iexact='')
 
         if user_qs.exists() and user_qs.count() == 1:

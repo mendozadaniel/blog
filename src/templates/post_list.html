@@ -9,10 +9,12 @@
 <form class="navbar-form navbar-left" method="GET" action="">
   {% csrf_token %}
     <div class="input-group search-field">
+
       <span class="input-group-addon search-icon">
         <i class="glyphicon glyphicon-search"></i>
       </span>
-      <input class="form-control" type="text" name="q" placeholder="" value="{{ request.GET.q }}" />
+
+      <input class="form-control" type="text" name="q" placeholder="Search" value="{{ request.GET.q }}" />
     </div>
 </form>
 {% endblock %}

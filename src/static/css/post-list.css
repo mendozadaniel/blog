@@ -1,11 +1,22 @@
 
 
+.navbar-form {
+    width: 100%;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+
+
 .search-icon {
-    background-color: #FFF; /* light gray */
+    background-color: #FFF;
 }
 
 .search-field input {
     border-left-style: none;
+    text-align: center;
 }
 
 

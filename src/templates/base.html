@@ -28,34 +28,56 @@
     <nav class="navbar navbar-default">
       <div class="container navbar-container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand text-logo" href="{% url 'posts:list' %}">A day in the life</a>
-
+        <div class="col-sm-3">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand text-logo" href="{% url 'posts:list' %}">
+              <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> | Bite Life
+            </a>
+          </div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        {% block search %}{% endblock %}
 
-          <ul class="nav navbar-nav navbar-right">
-            {% if request.user.is_staff or request.user.is_superuser %}
-            <li><a class="navbar-right-items" href='{% url "posts:create" %}'>Create</a></li>
-            {% endif %}
+        <div class="col-sm-9">
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="col-sm-9">
+            {% block search %}{% endblock %}
+            </div>
 
-            {% if not request.user.is_authenticated %}
-              <li><a class="navbar-right-items" href='{% url "register" %}'>Register</a></li>
-              <li><a class="navbar-right-items" href='{% url "login" %}'>Login</a></li>
-            {% else %}
-              <!--<li role="separator" class="divider"></li>-->
-              <li><a class="navbar-right-items" href='{% url "logout" %}'>Logout</a></li>
-            {% endif %}
-          </ul>
-        </div><!-- /.navbar-collapse -->
+            <ul class="nav navbar-nav navbar-right col-sm-3">
+              {% if not request.user.is_authenticated %}
+                <!--<li><a class="navbar-right-items" href='{% url "register" %}'>Register</a></li>-->
+                <li class="navbar-right">
+                  <a class="navbar-right-items" href='{% url "login" %}'>
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                  </a>
+                </li>
+              {% else %}
+                <!--<li role="separator" class="divider"></li>-->
+                <li class="navbar-right">
+                  <a class="navbar-right-items" href='{% url "logout" %}'>
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                  </a>
+                </li>
+              {% endif %}
+
+              {% if request.user.is_staff or request.user.is_superuser %}
+              <li class="navbar-right">
+                <a class="navbar-right-items " href='{% url "posts:create" %}'>
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
+              </li>
+              {% endif %}
+
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div>
+
       </div><!-- /.container-fluid -->
     </nav>
 	  {% include "messages_display.html" %}

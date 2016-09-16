@@ -31,13 +31,20 @@ p {
 }
 
 body {
-    background-image: url("../images/random_grey_variations.png");
+    // background-image: url("../images/random_grey_variations.png");
+    background-color: #fafafa;
 }
 
+.navbar-brand {
+    color: black !important;
+    font-size: 1.5em;
+}
 
-
-.navbar {
-    border: None;
+.navbar-default {
+    background-image: None;
+    background-color: white;
+    border-color: transparent;
+    border-radius: 0px;
 }
 
 .navbar-container {
@@ -48,8 +55,9 @@ body {
     height: 50px;
     padding: 15px 15px;
     line-height: 20px;
-    font-size: 18px;
     font-family: Cardo-Bold;
+    color: black !important;
+    font-size: 1.5em;
 }
 
 
