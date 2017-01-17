@@ -37,7 +37,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand text-logo" href="{% url 'posts:list' %}">
-              <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> | Bite Life
+              What Danny Says
             </a>
           </div>
         </div>
@@ -45,11 +45,11 @@
 
         <div class="col-sm-9">
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="col-sm-9">
+            <div class="col-sm-8">
             {% block search %}{% endblock %}
             </div>
 
-            <ul class="nav navbar-nav navbar-right col-sm-3">
+            <ul class="nav navbar-nav navbar-right col-sm-4">
               {% if not request.user.is_authenticated %}
                 <!--<li><a class="navbar-right-items" href='{% url "register" %}'>Register</a></li>-->
                 <li class="navbar-right">
