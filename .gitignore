@@ -120,3 +120,6 @@ ENV/
 
 # PYCHARM
 .idea/
+
+# Remove indication of backup file
+*~

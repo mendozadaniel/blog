@@ -1,5 +1,3 @@
-from urllib import quote_plus
-
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -36,7 +34,6 @@ def post_detail(request, slug=None):
     if post.draft or post.publish > timezone.now().date():
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
-    share_string = quote_plus(post.content)
 
     initial_data = {
         "content_type": post.get_content_type,
@@ -74,7 +71,6 @@ def post_detail(request, slug=None):
     context_data = {
         "title": post.title,
         "post": post,
-        "share_string": share_string,
         "comments": comments,
         "comment_form": comment_form,
     }
