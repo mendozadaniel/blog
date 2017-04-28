@@ -5,8 +5,10 @@ from django.contrib.auth import (
     login,
     logout,
 )
-
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
+
+from blog.local_settings import DEFAULT_FROM_EMAIL
 
 from .forms import UserLoginForm, UserRegisterForm
 
@@ -49,6 +51,11 @@ def register_view(request):
         password = form.cleaned_data.get("password")
         user.set_password(password)
         user.save()
+
+        subject = "New Registered User!"
+        message = "A new user has been registered by the username of " + user.username + "."
+        send_mail(subject, message, DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL], fail_silently=True)
+
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
         if next_page:
