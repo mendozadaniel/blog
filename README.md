@@ -69,10 +69,82 @@ publish : Publish Date, format MM-DD-YYYY
 ```
 
 #### View a particular post
+##### Request
+```
+GET /api/posts/post-slug/  
+```
+##### Response
+```
+{
+    "url": "http://mendozadaniel.tk/api/posts/post-slug/",
+    "id": 4,
+    "user": {
+        "username": "username"
+    },
+    "title": "title",
+    "slug": "slug",
+    "content": "content",
+    "html": "html-markup-content",
+    "publish": "2017-04-19",
+    "image": null,
+    "comments": [
+        {
+            "id": 1,
+            "content_type": 8,
+            "object_id": 1,
+            "parent": null,
+            "content": "This is a comment to the post.",
+            "reply_count": 1,
+            "timestamp": "2017-02-16T22:08:22.330982Z"
+        }
+    ]
+}
+```
+##### Input values
+```
+url         : Post url
+id          : Post id
+user        : User owner
+title       : Post title
+content     : Post content
+html        : Post content in html format
+publish     : Publish Date, format YYYY-MM-DD
+image       : Linked images
+comments    : Array of comments
+comments.id           : Comment id
+comments.content_type : 
+comments.object_id    : 
+comments.parent       : The id of the parent comment, used for replying to a comment
+comments.reply_count  : Number of replies to this particular comment
+comments.timestamp    : Timestamp in UTC
+```
 
-#### Edit a post  
+#### Edit a post   
+##### Request
+```
+POST /api/posts/post-slug/edit/ 
+```
+##### Response
+```
+```
+##### Input values
+```
+title   : Post Title
+content : Post Content
+publish : Publish Date, format MM-DD-YYYY
+```
 
 #### Delete a post   
+##### Request
+```
+POST /api/posts/post-slug/delete/ 
+```
+##### Response
+```
+```
+##### Input values
+```
+```
 
 ### Comments API
 | Resource                                                         | Description               |
