@@ -11,9 +11,9 @@ Other users can create an account so that they can comment on various blog posts
 ### Posts API
 | Resource                                  | Description            |
 | ----------------------------------------- |:----------------------:|
-| GET /api/posts/                           | Retrieve all posts     |
+| GET  /api/posts/                          | Retrieve all posts     |
+| GET  /api/posts/post-slug/                | View a particular post |
 | POST /api/posts/create/                   | Create a post          |
-| GET /api/posts/post-slug/                 | View a particular post |
 | POST /api/posts/post-slug/edit/           | Edit a post            |
 | POST /api/posts/post-slug/delete/         | Delete a post          |
 
@@ -45,27 +45,12 @@ GET /api/posts/
 count   : The number of total posts
 next    : The next page
 previous: The previous page
-results : A list containing on the posts
+results : A list containing all the posts
 url     : Post url
 user    : User owner
 title   : Post Title
 content : Post Content
 publish : Publish Date, format YYYY-MM-DD
-```
-
-#### Create a post  
-##### Request
-```
-POST /api/posts/create/ 
-```
-##### Response
-```
-```
-##### Input values
-```
-title   : Post Title
-content : Post Content
-publish : Publish Date, format MM-DD-YYYY
 ```
 
 #### View a particular post
@@ -119,6 +104,21 @@ comments.reply_count  : Number of replies to this particular comment
 comments.timestamp    : Timestamp in UTC
 ```
 
+#### Create a post  
+##### Request
+```
+POST /api/posts/create/ 
+```
+##### Response
+```
+```
+##### Input values
+```
+title   : Post Title
+content : Post Content
+publish : Publish Date, format MM-DD-YYYY
+```
+
 #### Edit a post   
 ##### Request
 ```
@@ -149,15 +149,107 @@ POST /api/posts/post-slug/delete/
 ### Comments API
 | Resource                                                         | Description               |
 | --------------------------------------------------------------   |:-------------------------:|
-| GET /api/comments/                                               | Retrieve all comments     |
+| GET  /api/comments/                                              | Retrieve all comments     |
+| GET  /api/comments/comment-id/                                   | Comment Detail API        |
 | POST /api/comments/create/?type=post&slug=post-slug&parent_id=16 | Create a comment          |
-| GET /api/comments/comment-id/                                    | View a particular comment |
 
 
-### Retrieve all posts
+#### Retreive all comments
+##### Request
+```
+GET /api/comments/
+```
+##### Response
+```
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "url": "http://mendozadaniel.tk/api/comments/2/",
+            "id": 2,
+            "content": "It's even more awesome that you can reply to a comment, that creates it's own thread.",
+            "reply_count": 0,
+            "timestamp": "2017-02-16T22:09:11.589818Z"
+        },
+        {
+            "url": "http://mendozadaniel.tk/api/comments/1/",
+            "id": 1,
+            "content": "That's awesome that you can style your post.",
+            "reply_count": 1,
+            "timestamp": "2017-02-16T22:08:22.330982Z"
+        }]
+}
+```
+##### Return values
+```
+count               : The number of total comments
+next                : The next page of comments
+previous            : The previous page of comments
+results             : A list containing all the comments
+results.url         : Post url
+results.id          : Comment id
+results.content     : Comment content
+results.reply_count : Replies to that particular comment
+results.timestamp   : Timestamp in UTC
+```
 
+#### Comment Detail API
+##### Request
+```
+GET /api/comments/comment-id/ 
+ex. /api/comments/1/ 
+```
+##### Response
+```
+{
+    "id": 1,
+    "user": {
+        "username": "username"
+    },
+    "content": "That's awesome that you can style your post.",
+    "timestamp": "2017-02-16T22:08:22.330982Z",
+    "reply_count": 1,
+    "replies": [
+        {
+            "id": 2,
+            "user": {
+                "username": "username"
+            },
+            "content": "It's even more awesome that you can reply to a comment, that creates it's own thread.",
+            "timestamp": "2017-02-16T22:09:11.589818Z"
+        }
+    ],
+    "content_object_url": "/api/posts/title-what-can-this-blog-do/"
+}
+```
+##### Return values
+```
+id                 : Comment ID
+user.username      : The user who posted the comment
+content            : Comment content
+timestamp          : Comment timestamp in UTC
+reply count        : Number of replies to that particular comment
+replies            : An array of all the comment replies
+replies.id         : Comment reply id
+replies.user       : Comment reply owner
+replies.content    : Comment reply content
+replies.timestamp  : Comment reply timestamp
+content_object_url : The post url this comment belongs to
+```
 
-
-#### To view a particular comment:
-/api/comments/comment-id/
-ex. /api/comments/26/
+#### Create a comment
+##### Request
+```
+POST /api/comments/create/?type=post&slug=post-slug&parent_id=16
+```
+##### Response
+```
+```
+##### Return values
+```
+type      : post
+slug      : post slug
+parent_id : post id it belongs to
+```
